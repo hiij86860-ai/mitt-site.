@@ -1,0 +1,678 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Profil — Systemutvecklare | Med certifikat</title>
+  <meta name="description" content="Profil för systemutvecklare — responsiv, bildrik och med din certifikatlista."/>
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --muted:#9aa4b2;
+      --accent:#6ee7b7;
+      --accent-2:#60a5fa;
+      --glass: rgba(255,255,255,0.04);
+      --radius:14px;
+      --max-width:1100px;
+      --fw-heading:800;
+      --fw-normal:600;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;}
+    body{
+      margin:0;
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+      background: linear-gradient(180deg,#071228 0%, #071a2a 100%);
+      color:#e6eef6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+    }
+
+    /* Header */
+    header{
+      position:sticky; top:0; z-index:60;
+      background: linear-gradient(180deg, rgba(7,10,18,0.72), rgba(7,10,18,0.32));
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+      backdrop-filter: blur(6px);
+    }
+    .nav{
+      max-width:var(--max-width); margin:0 auto; padding:14px 20px; display:flex; align-items:center; justify-content:space-between; gap:12px;
+    }
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:0.2px}
+    .brand .logo{width:40px;height:40px;border-radius:10px;overflow:hidden;display:inline-block;background:linear-gradient(135deg,var(--accent),var(--accent-2));box-shadow:0 6px 18px rgba(3,7,18,0.6)}
+    nav a{color:rgba(230,238,246,0.9); text-decoration:none; margin-left:14px; font-weight:600; padding:8px 10px; border-radius:10px}
+    nav a:hover{background:rgba(255,255,255,0.03)}
+
+    .container{max-width:var(--max-width); margin:28px auto; padding:0 20px;}
+
+    /* HERO */
+    .hero{
+      display:grid;
+      grid-template-columns: 1fr 360px;
+      gap:22px;
+      align-items:stretch;
+    }
+    .hero-card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:var(--radius);
+      padding:28px;
+      box-shadow: 0 10px 40px rgba(2,6,23,0.6);
+      overflow:hidden;
+      position:relative;
+    }
+    .hero-bg {
+      position:absolute; inset:0; z-index:0; opacity:.12;
+      background-image:url('https://images.unsplash.com/photo-1526378721904-55f9545f0d29?auto=format&fit=crop&w=1600&q=80');
+      background-size:cover; background-position:center; filter:blur(4px) saturate(.9);
+      transform: scale(1.05);
+      border-radius:var(--radius);
+      pointer-events:none;
+    }
+    .hero-content{position:relative; z-index:1}
+    h1{margin:0 0 8px 0; font-size:28px; font-weight:var(--fw-heading); letter-spacing:-0.6px; color: #fff}
+    .title-sub{color:var(--muted); margin:0 0 16px 0; font-size:15px}
+    .badges{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px}
+    .badge{background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02)); padding:8px 12px; border-radius:999px; color:var(--muted); font-weight:700; font-size:13px; border:1px solid rgba(255,255,255,0.03)}
+
+    .cta-row{display:flex; gap:10px; align-items:center; margin-top:12px}
+    .btn{padding:10px 14px;border-radius:10px;border:0;cursor:pointer;font-weight:800}
+    .btn-primary{background: linear-gradient(90deg,var(--accent), #45c4ff); color:#07202b}
+    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06); color:var(--muted)}
+
+    .summary{margin-top:16px;color:var(--muted); font-size:15px; max-width:60ch}
+
+    /* Profile side card */
+    .profile-card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:var(--radius);
+      padding:18px;
+      box-shadow: 0 8px 32px rgba(2,6,23,0.6);
+      display:flex; flex-direction:column; gap:12px; align-items:center; justify-content:flex-start;
+    }
+    .avatar{
+      width:160px; height:160px; border-radius:20px; overflow:hidden; border:4px solid rgba(255,255,255,0.04);
+      box-shadow: 0 8px 30px rgba(2,6,23,0.6); background:#0b1220; display:flex; align-items:center; justify-content:center;
+    }
+    .avatar img{width:100%; height:100%; object-fit:cover; display:block}
+    .name{font-size:20px; font-weight:800; margin-top:2px}
+    .role{color:var(--muted); font-weight:700; font-size:13px}
+    .socials{display:flex; gap:8px; margin-top:8px}
+    .socials a{background:rgba(255,255,255,0.02); padding:8px 10px; border-radius:10px; color:var(--muted); text-decoration:none; font-weight:700; font-size:13px}
+    .mini-stats{display:flex; gap:12px; margin-top:10px; width:100%; justify-content:space-between}
+    .stat{display:flex; flex-direction:column; align-items:center}
+    .stat .num{font-weight:800; font-size:18px}
+    .stat .lbl{font-size:12px; color:var(--muted)}
+
+    /* Sections */
+    section{margin-top:26px; scroll-margin-top:96px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005)); padding:18px; border-radius:12px; box-shadow: 0 8px 28px rgba(2,6,23,0.5)}
+    .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:18px}
+
+    /* Certificates */
+    .cert-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:12px; margin-top:12px}
+    .cert-card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.005));
+      border-radius:12px; padding:12px; position:relative; overflow:hidden;
+      display:flex; flex-direction:column; gap:8px; min-height:120px;
+      border:1px solid rgba(255,255,255,0.03);
+    }
+    .cert-title{font-weight:800; color:#fff; font-size:14px}
+    .cert-issuer{font-size:13px; color:var(--muted)}
+    .cert-meta{display:flex; gap:8px; flex-wrap:wrap; margin-top:6px}
+    .meta-pill{background:rgba(255,255,255,0.02); padding:6px 8px; border-radius:999px; font-size:12px; color:var(--muted); border:1px solid rgba(255,255,255,0.02)}
+    .cert-actions{margin-top:auto; display:flex; gap:8px; justify-content:flex-end}
+    .cert-actions button{padding:8px 10px;border-radius:8px;border:0;font-weight:800;cursor:pointer}
+    .btn-copy{background:rgba(255,255,255,0.03); color:var(--muted)}
+    .btn-view{background:linear-gradient(90deg,var(--accent), var(--accent-2)); color:#07202b}
+
+    /* small utilities */
+    .muted{color:var(--muted); font-size:13px}
+    .note{font-size:13px;color:var(--muted)}
+
+    /* Responsive */
+    @media (max-width:1020px){ .hero{grid-template-columns:1fr 320px} }
+    @media (max-width:860px){ .hero{grid-template-columns:1fr} .profile-card{order:-1} .container{padding:0 16px} }
+    @media (max-width:520px){ nav a{display:none} .nav{justify-content:space-between} h1{font-size:22px} .avatar{width:120px;height:120px} }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav" role="navigation" aria-label="Huvudnavigering">
+      <div style="display:flex;align-items:center;gap:12px">
+        <span class="brand">
+          <span class="logo" aria-hidden></span>
+          <span style="font-weight:800">Systemutvecklare</span>
+        </span>
+      </div>
+      <nav aria-label="Sektioner">
+        <a href="#start">Start</a>
+        <a href="#about">Om mig</a>
+        <a href="#skills">Kompetens</a>
+        <a href="#projects">Projekt</a>
+        <a href="#certs">Certifikat</a>
+        <a href="#contact">Kontakt</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" role="main">
+    <!-- HERO -->
+    <section id="start" aria-labelledby="start-heading" class="hero">
+      <div class="hero-card">
+        <div class="hero-bg" aria-hidden></div>
+        <div class="hero-content">
+          <h1 id="start-heading">Hej — jag är <span id="fullname">Ditt Namn</span></h1>
+          <div class="title-sub">Systemutvecklare | Backend & Arkitektur | Moln & Skalbarhet</div>
+
+          <div class="badges" role="list">
+            <div class="badge">C# • .NET</div>
+            <div class="badge">Docker • Kubernetes</div>
+            <div class="badge">AWS • Terraform</div>
+            <div class="badge">TDD • DDD</div>
+          </div>
+
+          <div class="cta-row">
+            <button class="btn btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Kontakta mig</button>
+            <button class="btn btn-ghost" id="downloadCv">Ladda CV</button>
+            <button class="btn btn-ghost" id="editProfile">Redigera profil</button>
+          </div>
+
+          <p class="summary">
+            Jag bygger robusta, testbara och skalbara system med fokus på säkerhet, driftbarhet och tydlig arkitektur. Här finns även mina certifikat och kurser.
+          </p>
+        </div>
+      </div>
+
+      <aside class="profile-card" aria-labelledby="profile-name">
+        <div class="avatar" id="avatarWrap">
+          <img id="avatarImg" alt="Profilbild" loading="lazy"
+               src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80">
+        </div>
+
+        <div class="name" id="profile-name">Ditt Namn</div>
+        <div class="role">Systemutvecklare & Arkitekt</div>
+
+        <div class="socials" aria-hidden>
+          <a href="#" id="emailLink">din@epost.se</a>
+          <a href="#" id="linkedin">LinkedIn</a>
+        </div>
+
+        <div class="mini-stats" aria-hidden>
+          <div class="stat"><div class="num">8+</div><div class="lbl">år erfarenhet</div></div>
+          <div class="stat"><div class="num">20+</div><div class="lbl">projekt</div></div>
+        </div>
+
+        <div style="width:100%; display:flex; gap:8px; margin-top:8px">
+          <button class="btn btn-ghost" id="changeAvatar">Byt bild</button>
+          <button class="btn btn-ghost" id="downloadPortfolio">Portfolio</button>
+        </div>
+      </aside>
+    </section>
+
+    <!-- OM MIG -->
+    <section id="about" aria-labelledby="about-heading">
+      <div class="card">
+        <h2 id="about-heading">Om mig</h2>
+        <div style="display:grid; grid-template-columns: 1fr 280px; gap:18px; align-items:start; margin-top:12px">
+          <div>
+            <p style="color:var(--muted); margin-top:0">
+              Jag är systemutvecklare som gillar att göra komplexa problem enkla. Jag arbetar gärna med mikrotjänster, event-driven design och observability. Har vanliga ramverk, verktyg och cloud-tjänster i verktygslådan.
+            </p>
+
+            <h4 style="margin-top:12px">Specialiseringar</h4>
+            <ul style="color:var(--muted); margin:8px 0 0 18px">
+              <li>Arkitektur & systemdesign</li>
+              <li>High-availability backend</li>
+              <li>CI/CD & infra as code</li>
+            </ul>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div class="card" style="padding:12px">
+              <strong>Språk</strong>
+              <div style="margin-top:8px; color:var(--muted)">Svenska, Engelska</div>
+            </div>
+            <div class="card" style="padding:12px">
+              <strong>Arbetssätt</strong>
+              <div style="margin-top:8px; color:var(--muted)">Agilt, DevOps, TDD</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- KOMPETENS -->
+    <section id="skills" aria-labelledby="skills-heading">
+      <div class="card">
+        <h2 id="skills-heading">Kompetens</h2>
+        <div class="grid-2" style="margin-top:12px">
+          <div>
+            <h4>Teknik & verktyg</h4>
+            <div style="margin-top:12px">
+              <div style="display:flex;gap:8px;flex-wrap:wrap">
+                <span class="badge">C# / .NET</span>
+                <span class="badge">Node.js</span>
+                <span class="badge">Docker</span>
+                <span class="badge">Kubernetes</span>
+                <span class="badge">AWS</span>
+                <span class="badge">Terraform</span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h4>Metodik</h4>
+            <div style="margin-top:12px">
+              <div style="display:flex;gap:8px;flex-wrap:wrap">
+                <span class="badge">TDD</span>
+                <span class="badge">CI/CD</span>
+                <span class="badge">DDD</span>
+                <span class="badge">Observability</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJEKT -->
+    <section id="projects" aria-labelledby="projects-heading">
+      <div class="card">
+        <h2 id="projects-heading">Projekt</h2>
+        <p style="color:var(--muted); margin-top:8px">Ett urval projekt med visuella miniatyrer.</p>
+
+        <div class="projects" style="margin-top:12px; display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:12px">
+          <a class="proj" href="#" style="border:1px solid rgba(0,0,0,0.18); border-radius:12px; overflow:hidden; position:relative; min-height:140px; display:flex; align-items:flex-end">
+            <img alt="Orderplattform" loading="lazy" src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=60" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover">
+            <div class="overlay" style="position:relative; z-index:2; width:100%; padding:12px; background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(2,6,23,0.6) 60%); color:#fff">
+              <h5 style="margin:0 0 6px 0">Orderplattform</h5>
+              <p style="margin:0; font-size:13px">Skalbar mikrotjänst-arkitektur med asynkrona flöden.</p>
+            </div>
+          </a>
+
+          <a class="proj" href="#" style="border:1px solid rgba(0,0,0,0.18); border-radius:12px; overflow:hidden; position:relative; min-height:140px; display:flex; align-items:flex-end">
+            <img alt="Integrationslager" loading="lazy" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=60" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover">
+            <div class="overlay" style="position:relative; z-index:2; width:100%; padding:12px; background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(2,6,23,0.6) 60%); color:#fff">
+              <h5 style="margin:0 0 6px 0">Integrationslager</h5>
+              <p style="margin:0; font-size:13px">Säkra integrationer mot externa betaltjänster.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CERTIFICATES -->
+    <section id="certs" aria-labelledby="certs-heading">
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:12px">
+          <h2 id="certs-heading">Certifikat & Kurser</h2>
+          <div style="display:flex; gap:8px">
+            <button class="btn btn-ghost" id="addCertBtn">Lägg till certifikat</button>
+            <button class="btn btn-ghost" id="exportCerts">Exportera (JSON)</button>
+          </div>
+        </div>
+
+        <p class="note" style="margin-top:8px">Här visas dina certifikat. Klicka på "Visa legitimering" för att se legitimerings-ID eller kopiera det.</p>
+
+        <div id="certGrid" class="cert-grid" aria-live="polite" style="margin-top:12px">
+          <!-- Certifikatkort genereras här via JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ERFARENHET / TIMELINE -->
+    <section id="experience" aria-labelledby="experience-heading">
+      <div class="card">
+        <h2 id="experience-heading">Erfarenhet</h2>
+        <div class="timeline" style="margin-top:12px">
+          <div class="timeline-item">
+            <div class="dot" aria-hidden style="width:12px;height:12px;background:var(--accent);border-radius:50%;margin-top:6px"></div>
+            <div>
+              <h4>Senior Systemutvecklare — Företag AB <small style="color:var(--muted);font-weight:700">· 2021 – nu</small></h4>
+              <p>Design och drift av mikrotjänster, kostnadsoptimering i molnet och observability.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="dot" aria-hidden style="width:12px;height:12px;background:var(--accent);border-radius:50%;margin-top:6px"></div>
+            <div>
+              <h4>Systemutvecklare — TechTeam <small style="color:var(--muted);font-weight:700">· 2018 – 2021</small></h4>
+              <p>Backendutveckling och integrationslösningar med fokus på skalbarhet.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- KONTAKT -->
+    <section id="contact" aria-labelledby="contact-heading">
+      <div class="card">
+        <h2 id="contact-heading">Kontakt</h2>
+        <p style="color:var(--muted); margin-top:8px">Skicka ett meddelande eller maila direkt.</p>
+
+        <form id="contactForm" novalidate style="margin-top:12px">
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px">
+            <input id="cf-name" name="name" type="text" placeholder="Namn" required>
+            <input id="cf-email" name="email" type="email" placeholder="E-post" required>
+          </div>
+          <textarea id="cf-msg" name="message" placeholder="Meddelande..." required></textarea>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Skicka</button>
+            <button type="reset" class="btn btn-ghost">Rensa</button>
+            <div id="formMsg" style="margin-left:auto; color:var(--muted); font-weight:700"></div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <footer style="margin-top:28px">&copy; <span id="year"></span> — Systemutvecklare. Certifikatlistan uppdaterad.</footer>
+  </main>
+
+  <script>
+    // Visa år
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // --- Din certifikatdata (från text du skickade) ---
+    // Jag har tagit med de certifikat du listade — om något saknas eller behöver justeras, skriv ändringarna så uppdaterar jag.
+    const certificates = [
+      {
+        title: "Dive Deeper into GA4 Data and Reports",
+        issuer: "United Latino Students Association",
+        issued: "apr. 2025",
+        expires: "apr. 2026",
+        id: "140135441"
+      },
+      {
+        title: "Fundamentals of digital marketing",
+        issuer: "United Latino Students Association",
+        issued: "apr. 2025",
+        expires: "",
+        id: ""
+      },
+      {
+        title: "Google Ads Apps Certification",
+        issuer: "Google",
+        issued: "apr. 2025",
+        expires: "apr. 2026",
+        id: "140074341"
+      },
+      {
+        title: "Introduction to Generative AI",
+        issuer: "Google",
+        issued: "apr. 2025",
+        expires: "",
+        id: "15035030"
+      },
+      {
+        title: "Introduction to Large Language Models",
+        issuer: "Google",
+        issued: "apr. 2025",
+        expires: "",
+        id: "15035871"
+      },
+      {
+        title: "Machine Learning Operations (MLOps) for Generative AI",
+        issuer: "Google",
+        issued: "apr. 2025",
+        expires: "",
+        id: "15036048"
+      },
+      {
+        title: "Machine Learning Operations (MLOps) with Vertex AI: Model Evaluation",
+        issuer: "Google",
+        issued: "apr. 2025",
+        expires: "",
+        id: "15037598"
+      },
+      {
+        title: "Responsible AI: Applying AI Principles with Google Cloud",
+        issuer: "Google / Google Cloud Skills Boost",
+        issued: "apr. 2025",
+        expires: "",
+        id: "15058266"
+      },
+      {
+        title: "Introduction to Responsible AI",
+        issuer: "Google",
+        issued: "apr. 2025",
+        expires: "",
+        id: "15041648"
+      },
+      {
+        title: "AI-powered performance ads certification",
+        issuer: "Google",
+        issued: "",
+        expires: "",
+        id: "141881639"
+      },
+      {
+        title: "CS50x: CS50's Introduction to Computer Science",
+        issuer: "Harvard University",
+        issued: "apr. 2025",
+        expires: "",
+        id: "12345678901234567890"
+      },
+      {
+        title: "Campaign Manager 360 Certification Exam",
+        issuer: "Google",
+        issued: "",
+        expires: "",
+        id: "140417827"
+      },
+      {
+        title: "Drive Advertising Revenue with Google Ad Manager",
+        issuer: "Google",
+        issued: "",
+        expires: "",
+        id: "57183140341479"
+      },
+      {
+        title: "Meta for Business – Kursdeltagande",
+        issuer: "Meta",
+        issued: "",
+        expires: "",
+        id: "124153189"
+      }
+    ];
+
+    // Renders the certificate cards
+    const certGrid = document.getElementById('certGrid');
+
+    function renderCerts() {
+      certGrid.innerHTML = '';
+      certificates.forEach((c, idx) => {
+        const card = document.createElement('div');
+        card.className = 'cert-card';
+        card.innerHTML = `
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+            <div>
+              <div class="cert-title">${escapeHtml(c.title)}</div>
+              <div class="cert-issuer">${escapeHtml(c.issuer)}</div>
+            </div>
+            <div style="text-align:right">
+              <div class="muted">${c.issued ? escapeHtml(c.issued) : ''}</div>
+              <div class="muted" style="font-size:12px">${c.expires ? 'Upphör: ' + escapeHtml(c.expires) : ''}</div>
+            </div>
+          </div>
+          <div class="cert-meta">
+            ${c.id ? `<div class="meta-pill">ID: ${escapeHtml(c.id)}</div>` : ''}
+            <div class="meta-pill">${c.issuer}</div>
+          </div>
+          <div class="cert-actions">
+            <button class="btn-copy" data-idx="${idx}">Kopiera ID</button>
+            <button class="btn-view" data-idx="${idx}">Visa legitimering</button>
+          </div>
+        `;
+        certGrid.appendChild(card);
+      });
+
+      // Haka på event listeners
+      certGrid.querySelectorAll('.btn-copy').forEach(btn=>{
+        btn.addEventListener('click', () => {
+          const i = Number(btn.getAttribute('data-idx'));
+          const id = certificates[i].id || '';
+          if(!id) {
+            alert('Det finns inget legitimerings-ID för detta certifikat.');
+            return;
+          }
+          navigator.clipboard?.writeText(id).then(()=> {
+            btn.textContent = 'Kopierat!';
+            setTimeout(()=> btn.textContent = 'Kopiera ID', 1200);
+          }).catch(()=> {
+            alert('Kunde inte kopiera automatiskt — kopiera manuellt: ' + id);
+          });
+        });
+      });
+
+      certGrid.querySelectorAll('.btn-view').forEach(btn=>{
+        btn.addEventListener('click', () => {
+          const i = Number(btn.getAttribute('data-idx'));
+          const cert = certificates[i];
+          // Visa en dialog med certifikatinformation och möjlighet att lägga in länk
+          const info = [
+            `Titel: ${cert.title}`,
+            `Utfärdare: ${cert.issuer}`,
+            `Utfärdad: ${cert.issued || '—'}`,
+            `Upphör: ${cert.expires || '—'}`,
+            `Legitimerings-ID: ${cert.id || '—'}`
+          ].join('\n');
+          if(confirm(info + '\n\nVill du lägga till en verifieringslänk (URL) för detta certifikat?')) {
+            const url = prompt('Klistra in verifieringslänk (fullständig URL):', '');
+            if(url) {
+              // Spara länken i objektet (fungerar i-session)
+              certificates[i].verificationUrl = url.trim();
+              alert('Verifieringslänk sparad i denna session. Den visas i certifikatkortet.');
+              renderCerts(); // rerender to show any link (simple refresh)
+            }
+          } else {
+            // Om länk redan finns, öppna den, annars bara visa info
+            if(cert.verificationUrl) {
+              window.open(cert.verificationUrl, '_blank', 'noopener');
+            } else {
+              alert(info);
+            }
+          }
+        });
+      });
+    }
+
+    // Escape för säker HTML-injektion i textnoder
+    function escapeHtml(text){
+      if(!text && text !== 0) return '';
+      return String(text)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    // Initial render
+    renderCerts();
+
+    // Add certificate button - låter dig lägga till nya certifikat snabbt
+    document.getElementById('addCertBtn').addEventListener('click', () => {
+      const title = prompt('Certifikatets titel:','');
+      if(!title) return;
+      const issuer = prompt('Utfärdare (t.ex. Google, Harvard):','');
+      const issued = prompt('Utfärdat (månad/år eller år):','');
+      const expires = prompt('Upphör (om tillämpligt):','');
+      const id = prompt('Legitimerings-ID (valfritt):','');
+      certificates.unshift({ title: title.trim(), issuer: issuer.trim(), issued: issued.trim(), expires: expires.trim(), id: id.trim() });
+      renderCerts();
+      // Scrolla till toppen av cert-grid för att se det nya
+      document.getElementById('certs').scrollIntoView({behavior:'smooth'});
+    });
+
+    // Exportera certifikat som JSON (laddas ner)
+    document.getElementById('exportCerts').addEventListener('click', () => {
+      const data = JSON.stringify(certificates, null, 2);
+      const blob = new Blob([data], {type: 'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'certificates.json';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    });
+
+    // Övriga interaktioner: avatar, edit, CV, portfolio
+    const avatarImg = document.getElementById('avatarImg');
+    document.getElementById('changeAvatar').addEventListener('click', ()=> {
+      const url = prompt('Klistra in direkt bild-URL (jpg/png/webp):', avatarImg.src);
+      if(!url) return;
+      const tester = new Image();
+      tester.crossOrigin = 'anonymous';
+      tester.onload = () => { avatarImg.src = url; alert('Profilbild uppdaterad.'); };
+      tester.onerror = () => { alert('Kunde inte ladda bilden. Kontrollera URL och att bilden är publikt tillgänglig.'); };
+      tester.src = url;
+    });
+
+    document.getElementById('downloadCv').addEventListener('click', (e)=>{
+      e.preventDefault();
+      const url = prompt('Klistra in CV-URL (pdf) eller lämna tomt för att avbryta:','');
+      if(url) window.open(url,'_blank','noopener');
+    });
+
+    document.getElementById('downloadPortfolio').addEventListener('click', (e)=>{
+      e.preventDefault();
+      const url = prompt('Klistra in portfolio-URL (webb eller PDF):','');
+      if(url) window.open(url,'_blank','noopener');
+    });
+
+    document.getElementById('editProfile').addEventListener('click', () => {
+      const name = prompt('Ditt namn:', document.getElementById('fullname').textContent);
+      if(name) {
+        document.getElementById('fullname').textContent = name;
+        document.getElementById('profile-name').textContent = name;
+      }
+      const email = prompt('E-post (syns i profil):', document.getElementById('emailLink').textContent);
+      if(email) document.getElementById('emailLink').textContent = email;
+      const role = prompt('Roll / titel:', document.querySelector('.role').textContent);
+      if(role) document.querySelector('.role').textContent = role;
+    });
+
+    // Kontaktformulär
+    const form = document.getElementById('contactForm');
+    const formMsg = document.getElementById('formMsg');
+    form?.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      formMsg.textContent = '';
+      const name = document.getElementById('cf-name').value.trim();
+      const email = document.getElementById('cf-email').value.trim();
+      const msg = document.getElementById('cf-msg').value.trim();
+      if(!name){ formMsg.textContent = 'Ange namn'; formMsg.style.color = '#ffb4b4'; return; }
+      if(!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ formMsg.textContent = 'Ogiltig e-post'; formMsg.style.color = '#ffb4b4'; return; }
+      if(!msg){ formMsg.textContent = 'Skriv ett meddelande'; formMsg.style.color = '#ffb4b4'; return; }
+      const btn = form.querySelector('button[type="submit"]');
+      btn.disabled = true; btn.textContent = 'Skickar…';
+      setTimeout(()=> {
+        btn.disabled = false; btn.textContent = 'Skicka';
+        form.reset();
+        formMsg.textContent = 'Tack! Jag återkommer snart.';
+        formMsg.style.color = '#9fe6c9';
+      }, 900);
+    });
+
+    // Accessibility: focus targets after jumping
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        const target = document.querySelector(a.getAttribute('href'));
+        if(target) setTimeout(()=>target.focus({preventScroll:true}), 300);
+      });
+    });
+  </script>
+</body>
+</html>
+````markdown name=README.md
+```markdown
+# Systemutvecklare — hiij86860-ai
+
+Personlig profil och portfolio för systemutvecklare. Innehåller certifikat, projekt och kontaktformulär.
+
+Open this repository and open index.html in a browser to view the profile site.
